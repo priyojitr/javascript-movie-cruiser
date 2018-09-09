@@ -1,6 +1,78 @@
 {
   "movies": [
+    {
+      "id": 1,
+      "title": "Sanju",
+      "posterPath": "../images/sanju.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 2,
+      "title": "Parmanu",
+      "posterPath": "../images/parmanu.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 3,
+      "title": "Raazi",
+      "posterPath": "../images/raazi.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 4,
+      "title": "Bharat Ana Nenu",
+      "posterPath": "../images/bharat.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 5,
+      "title": "October",
+      "posterPath": "../images/october.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 6,
+      "title": "Rangasthalam",
+      "posterPath": "../images/ranga.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 7,
+      "title": "Raid",
+      "posterPath": "../images/raid.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 8,
+      "title": "Padman",
+      "posterPath": "../images/padman.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 9,
+      "title": "Shaadi Mein Zaroor Ana ",
+      "posterPath": "../images/shaadi.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 10,
+      "title": "Ittefaq",
+      "posterPath": "../images/ittefaq.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    }
   ],
   "favourites": [
+    {
+      "id": 6,
+      "title": "Rangasthalam",
+      "posterPath": "../images/ranga.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    },
+    {
+      "id": 10,
+      "title": "Ittefaq",
+      "posterPath": "../images/ittefaq.jpg",
+      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
+    }
   ]
 }

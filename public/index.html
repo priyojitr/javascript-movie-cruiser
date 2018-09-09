@@ -4,31 +4,84 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Movie Cruiser</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+		crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
+	 <!-- page header section - menu bar with logo only -->
+	<header>
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+			<!-- website branding logo -->
+			<a class="navbar-brand" href="#">
+				<img class="brand-logo" src="images/PR.png" alt="Logo">
+			</a>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">PR Movies</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#moviesList">Movies</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#favouritesList">Favourites</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<!-- The Modal popup - to be displayed when an error occurs -->
+	<div id="errorModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p id="errorMsg">this is modal</p>
+		</div>
+	</div>
+	<!-- end of modal section -->
+	<!-- main page body section -->
+	<div class="container-fluid">
+		<div class="column">
 			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
 				<h2>Movies</h2>
-				<ul id="moviesList">
+				<ul id="moviesList" class="section">
 
 					<!-- Fill the Movies data here -->
 
 				</ul>
+				<!-- go to page top -->
+				<span><a href="#top">Top</a></span>
+				<br/>
 			</div>
+		</div>
+		<div class="column">
 			<div class="col-12 col-md-6"> <!-- Bootstrap classes can be modified as desired -->
 				<h2>Favourites</h2>
-				<ul id="favouritesList">
+				<ul id="favouritesList" class="section">
 						
 					<!-- Fill the Favourites data here -->	
 
 				</ul>
+				<!-- go to page top -->
+				<span><a href="#top">Top</a></span>
+				<br/>
 			</div>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
+	<script type="text/javascript">
+		// modal popup handler
+		let modal = document.getElementById('errorModal');
+		let span = document.getElementsByClassName('close')[0];
+		// close the modal when 'x' is clicked
+		span.onclick = function() {
+			modal.style.display = 'none';
+		};
+	</script>
 	<script type="text/javascript">
 		getMovies();
 		getFavourites();
