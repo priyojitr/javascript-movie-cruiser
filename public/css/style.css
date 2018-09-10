@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	font-family: 'Comfortaa',cursive;
-	font-size: 0.75em;
+	font-size: 0.75;
 }
 /* brand logo height */
 .brand-logo{
@@ -10,7 +10,7 @@ body {
 }
 /* favourite button font size */
 .btn{
-	font-size: 0.75em;
+	font-size: 0.5em;
 }
 /* card display section */
 .section
@@ -21,14 +21,14 @@ body {
 }
 /* card box layout */
 .card{
-	height:550px;
-	width:200px;
+	height:50vh;
+	width:15vw;
 	box-shadow: 1px 2px 15px grey;
 	margin:1em;
 }
 /* poster image size */
 .card img{
-	height: 120vh;
+	height: 30vh;
 }
 /* model section */
 .modal {

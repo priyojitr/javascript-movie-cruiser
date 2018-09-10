@@ -62,17 +62,5 @@
     }
   ],
   "favourites": [
-    {
-      "id": 6,
-      "title": "Rangasthalam",
-      "posterPath": "../images/ranga.jpg",
-      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
-    },
-    {
-      "id": 10,
-      "title": "Ittefaq",
-      "posterPath": "../images/ittefaq.jpg",
-      "overview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consectetur sagittis feugiat. Nam at faucibus."
-    }
-  ]
+    ]
 }

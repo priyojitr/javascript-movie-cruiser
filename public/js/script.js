@@ -1,41 +1,23 @@
 let favMoviesArr = [];
 let moviesArr = [];
-function populateFavMovies() {
-	let html = '';
-	favMoviesArr.forEach(favourite => {
-		html = html +
-		`<div class="card">
-			<img class="card-img-top" src="${favourite.posterPath}"/>
-			<div class="card-body">
-				<h5 class="card-title">${favourite.title}!</h5>
-				<p class="card-text">${favourite.overview}</p>
-			</div>
-		</div>`;
-	});
-	let favMoviesElm = document.getElementById('favouritesList');
-	favMoviesElm.innerHTML = html;
-}
+// get movie list
 function getMovies() {
 	let html = '';
 	return fetch('http://localhost:3000/movies')
 	.then(response => {
-		if(response.status === 200) {
-			return response.json();
+		if(response.ok) {
+			return Promise.resolve(response.json());
 		}
-		let modal = document.getElementById('errorModal');
-		let errorMsg = document.getElementById('errorMsg');
-		errorMsg.innerText = `Error while fetching movies: ${response.statusText}`;
-		modal.style.display = 'block';
 		return Promise.reject(new Error(`Error: ${response}`));
 	})
 	.then(movies => {
+		// build movies cards to be displayed
 		movies.forEach(movie => {
 			html = html +
 			`<div class="card">
 				<img class="card-img-top" src="${movie.posterPath}"/>
 				<div class="card-body">
 					<h5 class="card-title">${movie.title}!</h5>
-					<p class="card-text">${movie.overview}</p>
 					<a href="#" class="btn btn-primary" onclick="addFavourite(${movie.id})">
 						Add to Favourite
 					</a>
@@ -47,79 +29,81 @@ function getMovies() {
 		moviesElm.innerHTML = html;
 		return movies;
 	}).catch(error => {
-		let modal = document.getElementById('errorModal');
-		let errorMsg = document.getElementById('errorMsg');
-		errorMsg.innerText = 'Error occurred while populating movie list';
-		modal.style.display = 'block';
 		return new Error(`Error: ${error}`);
 	});
 }
+// get favourite movie list
 function getFavourites() {
 	return fetch('http://localhost:3000/favourites')
 	.then(response => {
-		if(response.status === 200) {
-			return response.json();
+		if(response.ok) {
+			return Promise.resolve(response.json());
 		}
-		let modal = document.getElementById('errorModal');
-		let errorMsg = document.getElementById('errorMsg');
-		errorMsg.innerText = `Error while fetching favourites list: ${response.statusText}`;
-		modal.style.display = 'block';
 		return Promise.reject(new Error(`Error: ${response}`));
 	})
 	.then(favourites => {
+		let html = '';
 		favMoviesArr = favourites;
-		populateFavMovies();
+		// build movies cards to be displayed
+		favMoviesArr.forEach(favourite => {
+			html = html +
+			`<div class="card">
+				<img class="card-img-top" src="${favourite.posterPath}"/>
+				<div class="card-body">
+					<h5 class="card-title">${favourite.title}!</h5>
+				</div>
+			</div>`;
+		});
+		let favMoviesElm = document.getElementById('favouritesList');
+		favMoviesElm.innerHTML = html;
 		return favourites;
 	})
 	.catch(error => {
-		let modal = document.getElementById('errorModal');
-		let errorMsg = document.getElementById('errorMsg');
-		errorMsg.innerText = 'Error occurred while populating favourite list';
-		modal.style.display = 'block';
 		return new Error(`Error: ${error}`);
 	});
 }
 function addFavourite(id) {
-	const addedMovies = favMoviesArr.filter(movie => movie.id === id);
-	if(Array.isArray(addedMovies) && addedMovies.length) {
-		let modal = document.getElementById('errorModal');
-		let errorMsg = document.getElementById('errorMsg');
-		errorMsg.innerText = 'Already added to favourite list';
-		modal.style.display = 'block';
-		throw new Error('Already added in favourites');
+	// get validity of the movie id
+	let movie = moviesArr[0].filter(item => item.id === id);
+	let html = '';
+	// get duplicate of favourite  list
+	let favMovie = favMoviesArr.filter(item => item.id === id);
+	// error check - duplicate entry to favourite list
+	if (favMovie.length > 0) {
+		throw new Error('Movie is already added to favourites');
 	}
-	else{
-		const movies = moviesArr[0].filter(movie => movie.id === id);
-		favMoviesArr.push(movies[0]);
-		return fetch('http://localhost:3000/favourites', {
-			method: 'post',
-			body: JSON.stringify(movies[0]),
-			headers: {
-				'content-type': 'application/json'
-			}
+	// error check -  invalid movie id
+	if (movie.length === 0) {
+		throw new Error('Invalid movie selected');
+	}
+	// add to favourite list
+	let promise = new Promise((resolve, reject) => {
+		fetch('http://localhost:3000/favourites', {
+			method: 'POST',
+			body: JSON.stringify(movie[0]),
+			headers: { 'content-type': 'application/json' }
 		})
-		.then(response => {
-			if(response.status >= 201 && response.status < 300) {
-				return response.json();
-			}
-			let modal = document.getElementById('errorModal');
-			let errorMsg = document.getElementById('errorMsg');
-			errorMsg.innerText = `Error while adding to favourite list: ${response.statusText}`;
-			modal.style.display = 'block';
-			return Promise.reject(new Error(`Error: ${response}`));
+		.then(res => res.json())
+		.then((data) => {
+			// refresh favourite list
+			favMoviesArr.push(data);
+			favMoviesArr.forEach(favourite => {
+				html = html +
+				`<div class="card">
+					<img class="card-img-top" src="${favourite.posterPath}"/>
+					<div class="card-body">
+						<h5 class="card-title">${favourite.title}!</h5>
+					</div>
+				</div>`;
+			});
+			document.getElementById('favouritesList').innerHTML = html;
+			resolve(favMoviesArr);
 		})
-		.then(() => {
-			populateFavMovies();
-			return favMoviesArr;
-		})
-		.catch(error => {
-			let modal = document.getElementById('errorModal');
-			let errorMsg = document.getElementById('errorMsg');
-			errorMsg.innerText = 'Error occurred while populating favourite list';
-			modal.style.display = 'block';
-			return Promise.reject(error);
+		.catch((error) => {
+			reject(new Error(error));
 		});
-	}
+	});
+	return promise;
 }
 
 module.exports = {
